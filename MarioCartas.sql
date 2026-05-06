@@ -36,7 +36,7 @@ descripcion VARCHAR(50)
 
 CREATE TABLE IF NOT EXISTS objetos (
 
-id_habilidad INT AUTO_INCREMENT PRIMARY KEY,
+id_objeto INT AUTO_INCREMENT PRIMARY KEY,
 objeto VARCHAR(20),
 coste INT,
 ataque INT,
