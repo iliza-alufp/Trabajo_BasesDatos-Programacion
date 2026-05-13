@@ -58,7 +58,7 @@ id_clase INT,
 id_objeto INT,
 /*id_habilidad INT,*/
 FOREIGN KEY (id_clase) REFERENCES clases (id_clase) ON DELETE CASCADE,
-FOREIGN KEY (id_objeto) REFERENCES objetos (id_objeto) ON DELETE CASCADE
+FOREIGN KEY (id_objeto) REFERENCES objetos (id_objeto) ON DELETE NULL
 /*FOREIGN KEY (id_habilidad) REFERENCES habilidades (id_habilidad) ON DELETE CASCADE*/
 );
 
