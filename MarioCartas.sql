@@ -32,7 +32,6 @@ ataque_aumentado INT,
 ataque INT,
 vida_aumentada INT,
 vida_disminuida INT,
-velocidad_aumentada INT
 );
 
 CREATE TABLE IF NOT EXISTS objetos (
@@ -52,7 +51,6 @@ id_personaje INT AUTO_INCREMENT PRIMARY KEY,
 nombre VARCHAR(20),
 vida INT,
 ataque INT,
-/*velocidad INT,*/
 coste INT,
 id_clase INT,
 id_objeto INT,
