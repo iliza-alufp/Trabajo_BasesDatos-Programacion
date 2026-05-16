@@ -27,21 +27,20 @@ descripcion VARCHAR(50)
 
 CREATE TABLE IF NOT EXISTS efectos (
 id_efecto INT AUTO_INCREMENT PRIMARY KEY,
-efecto VARCHAR(50),
+efecto VARCHAR(100),
 ataque_aumentado INT,
 ataque INT,
 vida_aumentada INT,
-vida_disminuida INT,
+vida_disminuida INT
 );
 
 CREATE TABLE IF NOT EXISTS objetos (
 
 id_objeto INT AUTO_INCREMENT PRIMARY KEY,
-objeto VARCHAR(20),
+nombre VARCHAR(50),
 coste INT,
-ataque INT,
 id_efecto INT,
-descripcion VARCHAR(50),
+descripcion VARCHAR(100),
 FOREIGN KEY (id_efecto) REFERENCES efectos (id_efecto) ON DELETE CASCADE
 );
 
@@ -55,10 +54,22 @@ coste INT,
 id_clase INT,
 id_objeto INT,
 /*id_habilidad INT,*/
-FOREIGN KEY (id_clase) REFERENCES clases (id_clase) ON DELETE CASCADE,
+FOREIGN KEY (id_clase) REFERENCES clases (id_clase) ON DELETE SET NULL,
 FOREIGN KEY (id_objeto) REFERENCES objetos (id_objeto) ON DELETE SET NULL
 /*FOREIGN KEY (id_habilidad) REFERENCES habilidades (id_habilidad) ON DELETE CASCADE*/
 );
+
+CREATE TABLE IF NOT EXISTS usuarios (
+id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(30)
+  );
+
+CREATE TABLE IF NOT EXISTS mazo (
+id_mazo INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50),
+id_personaje INT,
+FOREIGN KEY (id_personaje) REFERENCES personajes(id_personaje) ON DELETE SET NULL
+  );
 
 -- Elementos de la tabla clases
 INSERT INTO clases (id_clase, nombre) VALUES
@@ -251,9 +262,37 @@ INSERT INTO personajes (id_personaje, nombre, vida, ataque, coste, id_clase, id_
 (99, 'Abejorro', 1, 3, 1, 21, null),
 (100, 'Marchimotas', 3, 1, 2, 21, null);
 
+-- Elementos de la tabla efectos
+INSERT INTO efectos (id_efecto, efecto, ataque_aumentado, ataque, vida_aumentada, vida_disminuida) VALUES
+(1, "Aumenta la vitalidad de todo aquel que lo consuma", 1, 0, 2, 0),
+(2, "Aumenta el ataque del poseedor", 4, 0, 0, 0),
+(3, "Aumenta el ataque y paraliza al adversario", 3, 0, 0, 0),
+(4, "Aumenta drásticamente el poder", 6, 0, 0, 0),
+(5, "Aumenta el ataque", 3, 0, 0, 0),
+(6, "Aumenta el ataque", 5, 0, 0, 0),
+(7, "Ajo extraño que sube la vitalidad", 2, 0, 1, 0),
+(8, "Misil que daña al enemigo", 0, 3, 0, 0),
+(9, "Gran misil de daño masivo", 0, 5, 0, 0),
+(10, "Champiñón venenoso reutilizable", 0, 0, 0, 1),
+(11, "Champiñón con poderes curativos milagrosos", 0, 0, 4, 0),
+(12, "Todo aquel que lo consuma vivrá su mejor estado de forma", 6, 0, 6, 0),
+(13, "Extraña campana de aura gatuna", 3, 0, 0, 0);
 
-
-
+-- Elementos de la tabla objetos
+INSERT INTO (id_objeto, nombre, coste, id_efecto, descripción) VALUES
+(1, "Champiñón", 3, 1, "Aumenta la vitalidad de todo aquel que lo consuma"),
+(2, "Flor de fuego", 3, 2, "Aumenta el ataque del poseedor"),
+(3, "Flor de hielo", 3, 3, "Aumenta el ataque y paraliza al adversario"),
+(4, "Estrella", 6, 4, "Aumenta drásticamente el poder"),
+(5, "Gorra toro", 3, 5, "Aumenta el ataque"),
+(6, "Gorra dragón", 4, 6, "Aumenta el ataque"),
+(7, "Ajo", 3, 7, "Ajo extraño que sube la vitalidad"),
+(8, "Bill Bala", 2, 8, "Misil que daña al enemigo"),
+(9, "Bill Banzai", 4, 9, "Gran misil de daño masivo"),
+(10, "Champiñón venenoso", 2, 10, "Champiñón venenoso reutilizable"),
+(11, "Vida extra", 5, 11, "Champiñón con poderes curativos milagrosos"),
+(12, "Duplicereza", 7, 12, "Todo aquel que lo consuma vivrá su mejor estado de forma"),
+(13, "Campana de gato", 4, 13, "Extraña campana de aura gatuna");
 
 
 
