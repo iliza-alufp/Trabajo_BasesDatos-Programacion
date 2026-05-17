@@ -67,9 +67,17 @@ nombre VARCHAR(30)
 CREATE TABLE IF NOT EXISTS mazo (
 id_mazo INT PRIMARY KEY AUTO_INCREMENT,
   nombre VARCHAR(50),
-id_personaje INT,
-FOREIGN KEY (id_personaje) REFERENCES personajes(id_personaje) ON DELETE SET NULL
+id_usuario INT,
+FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
   );
+
+CREATE TABLE IF NOT EXISTS cartas_mazo (
+id_mazo INT,
+id_personaje INT,
+PRIMARY KEY (id_mazo, id_personaje),
+FOREIGN KEY (id_mazo) REFERENCES mazo (id_mazo) ON DELETE CASCADE,
+FOREIGN KEY (id_personaje) REFERENCES personajes (id_personaje) ON DELETE CASCADE
+);
 
 -- Elementos de la tabla clases
 INSERT INTO clases (id_clase, nombre) VALUES
@@ -279,7 +287,7 @@ INSERT INTO efectos (id_efecto, efecto, ataque_aumentado, ataque, vida_aumentada
 (13, "Extraña campana de aura gatuna", 3, 0, 0, 0);
 
 -- Elementos de la tabla objetos
-INSERT INTO (id_objeto, nombre, coste, id_efecto, descripción) VALUES
+INSERT INTO objetos (id_objeto, nombre, coste, id_efecto, descripcion) VALUES
 (1, "Champiñón", 3, 1, "Aumenta la vitalidad de todo aquel que lo consuma"),
 (2, "Flor de fuego", 3, 2, "Aumenta el ataque del poseedor"),
 (3, "Flor de hielo", 3, 3, "Aumenta el ataque y paraliza al adversario"),
