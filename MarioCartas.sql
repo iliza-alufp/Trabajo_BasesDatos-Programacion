@@ -306,7 +306,7 @@ INSERT INTO objetos (id_objeto, nombre, coste, id_efecto, descripcion) VALUES
 INSERT INTO usuarios (id_usuario, nombre) VALUES
 (1, "Miyamoto"),
 (2, "Koizumi"),
-(3, "Aonuma");
+(3, "Tezuka");
 
 
 -- CONSULTAS
