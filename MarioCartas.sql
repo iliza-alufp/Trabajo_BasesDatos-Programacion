@@ -304,4 +304,14 @@ INSERT INTO objetos (id_objeto, nombre, coste, id_efecto, descripcion) VALUES
 
 
 
+DELIMITER //
+
+CREATE PROCEDURE crear_usuario(p_nombre VARCHAR(30))
+
+  BEGIN
+  INSERT INTO usuarios (nombre) VALUES p_nombre;
+  END //
+  
+DELIMITER ;
+
 
