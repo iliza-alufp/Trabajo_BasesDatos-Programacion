@@ -302,7 +302,11 @@ INSERT INTO objetos (id_objeto, nombre, coste, id_efecto, descripcion) VALUES
 (12, "Duplicereza", 7, 12, "Todo aquel que lo consuma vivrá su mejor estado de forma"),
 (13, "Campana de gato", 4, 13, "Extraña campana de aura gatuna");
 
-
+-- Elementos de la tabla usuarios
+INSERT INTO usuarios (id_usuario, nombre) VALUES
+(1, "Miyamoto"),
+(2, "Koizumi"),
+(3, "Aonuma");
 
 DELIMITER //
 
