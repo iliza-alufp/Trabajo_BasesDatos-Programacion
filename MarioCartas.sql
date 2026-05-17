@@ -308,6 +308,16 @@ INSERT INTO usuarios (id_usuario, nombre) VALUES
 (2, "Koizumi"),
 (3, "Aonuma");
 
+
+-- CONSULTAS
+-- Número de cartas por clase
+SELECT c.nombre AS CLASE, COUNT(id_personaje) AS NUMERO_PERSONAJES
+FROM personajes p
+JOIN clase c ON p.id_clase = c.id_clase
+GROUP BY c.nombre
+ORDER BY NUMERO_PERSONAJES;
+
+
 DELIMITER //
 
 CREATE PROCEDURE crear_usuario(p_nombre VARCHAR(30))
