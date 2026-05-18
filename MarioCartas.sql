@@ -2,7 +2,7 @@ CREATE DATABASE MarioCartas;
 
 USE MarioCartas;
 
--- Tabla de los personajes
+
 
 
 
@@ -13,6 +13,7 @@ id_clase INT AUTO_INCREMENT PRIMARY KEY,
 nombre VARCHAR(20)
 
 );
+/*
 -- Tabla de las habilidades
 
 CREATE TABLE IF NOT EXISTS habilidades (
@@ -22,7 +23,7 @@ nombre VARCHAR(20),
 descripcion VARCHAR(50)
 
 );
-
+*/
 -- Tabla de los objetos
 
 CREATE TABLE IF NOT EXISTS efectos (
@@ -44,6 +45,7 @@ descripcion VARCHAR(100),
 FOREIGN KEY (id_efecto) REFERENCES efectos (id_efecto) ON DELETE CASCADE
 );
 
+-- Tabla de los personajes
 CREATE TABLE IF NOT EXISTS personajes (
 
 id_personaje INT AUTO_INCREMENT PRIMARY KEY,
