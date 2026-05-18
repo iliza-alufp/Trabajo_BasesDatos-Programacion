@@ -319,7 +319,27 @@ JOIN clase c ON p.id_clase = c.id_clase
 GROUP BY c.nombre
 ORDER BY NUMERO_PERSONAJES;
 
+-- Las 10 cartas con más vida
+SELECT nombre, vida
+FROM personaje
+ORDER BY vida
+LIMIT 10;
 
+-- Las cartas con ataque superior a la media
+SELECT nombre, ataque
+FROM personaje
+WHERE ataque > (
+  SELECT AVG(ataque)
+  FROM personaje
+  );
+
+-- Las 10 cartas más caras
+SELECT nombre, coste
+FROM personaje
+ORDER BY coste
+LIMIT 10;
+
+-- PROCEDIMIENTOS Y FUNCIONES
 DELIMITER //
 
 CREATE PROCEDURE crear_usuario(p_nombre VARCHAR(30))
