@@ -315,37 +315,38 @@ INSERT INTO usuarios (id_usuario, nombre) VALUES
 -- Número de cartas por clase
 SELECT c.nombre AS CLASE, COUNT(id_personaje) AS NUMERO_PERSONAJES
 FROM personajes p
-JOIN clase c ON p.id_clase = c.id_clase
+JOIN clases c ON p.id_clase = c.id_clase
 GROUP BY c.nombre
 ORDER BY NUMERO_PERSONAJES;
 
 -- Las 10 cartas con más vida
 SELECT nombre, vida
-FROM personaje
+FROM personajes
 ORDER BY vida
 LIMIT 10;
 
 -- Las cartas con ataque superior a la media
 SELECT nombre, ataque
-FROM personaje
+FROM personajes
 WHERE ataque > (
   SELECT AVG(ataque)
-  FROM personaje
+  FROM personajes
   );
 
 -- Las 10 cartas más caras
 SELECT nombre, coste
-FROM personaje
+FROM personajes
 ORDER BY coste
 LIMIT 10;
 
 -- PROCEDIMIENTOS Y FUNCIONES
 DELIMITER //
 
-CREATE PROCEDURE crear_usuario(p_nombre VARCHAR(30))
+CREATE PROCEDURE crear_usuario(IN p_nombre VARCHAR(30))
 
   BEGIN
-  INSERT INTO usuarios (nombre) VALUES p_nombre;
+   INSERT INTO usuarios(nombre) VALUES(p_nombre);
+
   END //
   
 DELIMITER ;
