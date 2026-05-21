@@ -343,7 +343,7 @@ LIMIT 10;
 -- Crear nuevos usuarios
 DELIMITER //
 
-CREATE PROCEDURE crear_usuario(p_nombre VARCHAR(30))
+CREATE PROCEDURE crear_usuario(IN p_nombre VARCHAR(30))
 
   BEGIN
    INSERT INTO usuarios(nombre) VALUES(p_nombre);
@@ -355,7 +355,7 @@ DELIMITER ;
 -- Crear y eliminar cartas de la base de datos
 DELIMITER //
 
-  CREATE PROCEDURE crear_carta(p_nombre VARCHAR(20), p_vida INT, p_ataque INT, p_coste INT, p_id_clase INT, p_id_objeto INT)
+  CREATE PROCEDURE crear_carta(IN p_nombre VARCHAR(20), IN p_vida INT, IN p_ataque INT, IN p_coste INT, IN p_id_clase INT, IN p_id_objeto INT)
 
   BEGIN
   INSERT INTO personajes (nombre, vida, ataque, coste, id_clase, id_objeto) VALUES
@@ -366,7 +366,7 @@ DELIMITER ;
 
 DELIMITER //
 
-  CREATE PROCEDURE eliminar_carta (p_nombre VARCHAR(20))
+  CREATE PROCEDURE eliminar_carta (IN p_nombre VARCHAR(20))
 
   BEGIN
       DELETE FROM personajes
