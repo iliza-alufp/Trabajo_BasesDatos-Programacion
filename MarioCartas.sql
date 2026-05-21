@@ -63,7 +63,8 @@ FOREIGN KEY (id_objeto) REFERENCES objetos (id_objeto)
 
 CREATE TABLE IF NOT EXISTS usuarios (
 id_usuario INT PRIMARY KEY AUTO_INCREMENT,
-nombre VARCHAR(30)
+nombre VARCHAR(30),
+contrasenya VARCHAR(20)
   );
 
 CREATE TABLE IF NOT EXISTS mazo (
@@ -305,10 +306,10 @@ INSERT INTO objetos (id_objeto, nombre, coste, id_efecto, descripcion) VALUES
 (13, "Campana de gato", 4, 13, "Extraña campana de aura gatuna");
 
 -- Elementos de la tabla usuarios
-INSERT INTO usuarios (id_usuario, nombre) VALUES
-(1, "Miyamoto"),
-(2, "Koizumi"),
-(3, "Tezuka");
+INSERT INTO usuarios (id_usuario, nombre, contrasenya) VALUES
+(1, "Miyamoto", "Mario1234"),
+(2, "Koizumi", "Majora4Ever"),
+(3, "Tezuka", "Sunshine");
 
 
 -- CONSULTAS
@@ -343,11 +344,23 @@ LIMIT 10;
 -- Crear nuevos usuarios
 DELIMITER //
 
-CREATE PROCEDURE crear_usuario(IN p_nombre VARCHAR(30))
+CREATE PROCEDURE crear_usuario(IN p_nombre VARCHAR(30), IN p_contrasenya VARCHAR(20))
 
   BEGIN
-   INSERT INTO usuarios(nombre) VALUES(p_nombre);
+   INSERT INTO usuarios(nombre, contrasenya) VALUES(p_nombre, p_contrasenya);
+  END //
+  
+DELIMITER ;
 
+-- Eliminar un usuario, se necesita su contraseña para poder borrarlo
+DELIMITER //
+
+  CREATE PROCEDURE eliminar_usuario(IN p_nombre VARCHAR(30), IN p_contrasenya VARCHAR(20))
+
+  BEGIN
+    DELETE FROM usuarios
+    WHERE p_nombre = nombre
+    AND p_contrasenya = contrasenya;
   END //
   
 DELIMITER ;
