@@ -340,9 +340,10 @@ ORDER BY coste
 LIMIT 10;
 
 -- PROCEDIMIENTOS Y FUNCIONES
+-- Crear nuevos usuarios
 DELIMITER //
 
-CREATE PROCEDURE crear_usuario(IN p_nombre VARCHAR(30))
+CREATE PROCEDURE crear_usuario(p_nombre VARCHAR(30))
 
   BEGIN
    INSERT INTO usuarios(nombre) VALUES(p_nombre);
@@ -351,4 +352,25 @@ CREATE PROCEDURE crear_usuario(IN p_nombre VARCHAR(30))
   
 DELIMITER ;
 
+-- Crear y eliminar cartas de la base de datos
+DELIMITER //
 
+  CREATE PROCEDURE crear_carta(p_nombre VARCHAR(20), p_vida INT, p_ataque INT, p_coste INT, p_id_clase INT, p_id_objeto INT)
+
+  BEGIN
+  INSERT INTO personajes (nombre, vida, ataque, coste, id_clase, id_objeto) VALUES
+  (p_nombre, p_vida, p_ataque, p_coste, p_id_clase, p_id_objeto);
+  END //
+  
+DELIMITER ;
+
+DELIMITER //
+
+  CREATE PROCEDURE eliminar_carta (p_nombre VARCHAR(20))
+
+  BEGIN
+      DELETE FROM personajes
+      WHERE nombre = p_nombre;
+  END //
+  
+DELIMITER ;
