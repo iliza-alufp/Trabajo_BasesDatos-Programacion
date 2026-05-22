@@ -325,7 +325,7 @@ SELECT nombre, vida
 FROM personajes
 ORDER BY vida
 LIMIT 10;
-
+  
 -- Las cartas con ataque superior a la media
 SELECT nombre, ataque
 FROM personajes
@@ -384,6 +384,20 @@ DELIMITER //
   BEGIN
       DELETE FROM personajes
       WHERE nombre = p_nombre;
+  END //
+  
+DELIMITER ;
+
+-- Buscar cartas por nombre
+
+DELIMITER //
+
+CREATE PROCEDURE (IN p_nombre VARCHAR(30))
+
+  BEGIN
+    SELECT nombre, vida, ataque, coste
+    FROM personaje
+  WHERE p_nombre = nombre;
   END //
   
 DELIMITER ;
