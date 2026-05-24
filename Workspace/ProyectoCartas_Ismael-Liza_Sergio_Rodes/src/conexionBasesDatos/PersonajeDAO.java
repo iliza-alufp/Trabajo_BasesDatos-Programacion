@@ -2,19 +2,21 @@ package conexionBasesDatos;
 
 import modelo.Personaje;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersonajeDAO {
 
-    // INSERTAR CARTA (Llamando a tu procedimiento crear_carta)
+    private MySQLConnection db = new MySQLConnection();
+
+    // INSERTAR CARTA (Llamando al procedimiento crear_carta)
     public boolean insertar(Personaje p) {
         String sql = "{call crear_carta(?, ?, ?, ?, ?, ?)}";
-        try (Connection con = MySQLConnection.getConexion();
+        try (Connection con = db.mySQLConnect();
              CallableStatement cs = con.prepareCall(sql)) {
             
             cs.setString(1, p.getNombre());
@@ -22,6 +24,7 @@ public class PersonajeDAO {
             cs.setInt(3, p.getAtaque());
             cs.setInt(4, p.getCoste());
             cs.setInt(5, p.getIdClase());
+            
             if (p.getIdObjeto() == null) {
                 cs.setNull(6, Types.INTEGER);
             } else {
@@ -34,10 +37,10 @@ public class PersonajeDAO {
         }
     }
 
-    // ELIMINAR CARTA (Llamando a tu procedimiento eliminar_carta)
+    // ELIMINAR CARTA (Llamando al procedimiento eliminar_carta)
     public boolean eliminar(String nombre) {
         String sql = "{call eliminar_carta(?)}";
-        try (Connection con = MySQLConnection.getConexion();
+        try (Connection con = db.mySQLConnect();
              CallableStatement cs = con.prepareCall(sql)) {
             
             cs.setString(1, nombre);
@@ -48,11 +51,12 @@ public class PersonajeDAO {
         }
     }
 
-    // CONSULTA: Buscar cartas por nombre usando tu procedimiento
+    // CONSULTA: Buscar cartas (Llamando al procedimiento buscar_carta de tu SQL)
     public List<Personaje> buscarPorNombre(String nombreBuscar) {
         List<Personaje> lista = new ArrayList<>();
-        String sql = "{call buscar_carta_por_nombre(?)}";
-        try (Connection con = MySQLConnection.getConexion();
+        // Unificado con el nombre exacto de tu script SQL
+        String sql = "{call buscar_carta(?)}"; 
+        try (Connection con = db.mySQLConnect();
              CallableStatement cs = con.prepareCall(sql)) {
             
             cs.setString(1, nombreBuscar);
