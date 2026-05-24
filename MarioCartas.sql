@@ -365,6 +365,19 @@ DELIMITER //
   
 DELIMITER ;
 
+-- Modificar el nombre del usuario
+DELIMITER //
+
+CREATE PROCEDURE modificar_usuario(IN p_id_usuario INT, IN nuevoNombre VARCHAR(30))
+
+  BEGIN
+    UPDATE usuarios
+    SET nombre = nuevoNombre
+    WHERE p_id_usuario = id_usuario;
+  END //
+  
+DELIMITER ;
+
 -- Crear y eliminar cartas de la base de datos
 DELIMITER //
 
