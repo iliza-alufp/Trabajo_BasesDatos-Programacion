@@ -234,44 +234,44 @@ INSERT INTO personajes (id_personaje, nombre, vida, ataque, coste, id_clase, id_
 
 -- Elementos de la tabla personajes Judía
 INSERT INTO personajes (id_personaje, nombre, vida, ataque, coste, id_clase, id_objeto) VALUES
-(81, 'Cackletta', 7, 6, 6, 15, null),
-(82, 'Grácovitz', 8, 9, 7, 15, null);
+(81, 'Cackletta', 7, 6, 6, 16, null),
+(82, 'Grácovitz', 8, 9, 7, 16, null);
 
 -- Elementos de la tabla personajes Conejo
 INSERT INTO personajes (id_personaje, nombre, vida, ataque, coste, id_clase, id_objeto) VALUES
-(83, 'Caco Gazapo', 3, 4, 3, 16, null);
+(83, 'Caco Gazapo', 3, 4, 3, 17, null);
 
 -- Elementos de la tabla personajes Pez
 INSERT INTO personajes (id_personaje, nombre, vida, ataque, coste, id_clase, id_objeto) VALUES
-(84, 'Cheep Cheep', 2, 1, 1, 17, null),
-(85, 'Pezueso', 1, 3, 2, 17, null),
-(86, 'Cheep Chomp', 3, 3, 3, 17, null),
-(87, 'Delfín', 3, 2, 3, 17, null),
-(88, 'Blooper', 2, 2, 2, 17, null),
-(89, 'Gooper Blooper', 6, 6, 6, 17, null);
+(84, 'Cheep Cheep', 2, 1, 1, 18, null),
+(85, 'Pezueso', 1, 3, 2, 18, null),
+(86, 'Cheep Chomp', 3, 3, 3, 18, null),
+(87, 'Delfín', 3, 2, 3, 18, null),
+(88, 'Blooper', 2, 2, 2, 18, null),
+(89, 'Gooper Blooper', 6, 6, 6, 18, null);
 
 -- Elementos de la tabla personajes Ave
 INSERT INTO personajes (id_personaje, nombre, vida, ataque, coste, id_clase, id_objeto) VALUES
-(90, 'Cataquack', 4, 1, 3, 18, null),
-(91, 'Conkdor', 2, 2, 2, 18, null),
-(92, 'Pingüino', 2, 1, 1, 18, null);
+(90, 'Cataquack', 4, 1, 3, 19, null),
+(91, 'Conkdor', 2, 2, 2, 19, null),
+(92, 'Pingüino', 2, 1, 1, 19, null);
 
 -- Elementos de la tabla personajes Murciélago
 INSERT INTO personajes (id_personaje, nombre, vida, ataque, coste, id_clase, id_objeto) VALUES
-(93, 'Swoop', 2, 1, 1, 19, null);
+(93, 'Swoop', 2, 1, 1, 20, null);
 
 -- Elementos de la tabla personajes Kremling
 INSERT INTO personajes (id_personaje, nombre, vida, ataque, coste, id_clase, id_objeto) VALUES
-(94, 'Kritter', 2, 1, 1, 20, null),
-(95, 'Krusha', 3, 3, 3, 20, null),
-(96, 'Klaptrap', 1, 1, 0, 20, null),
-(97, 'Klobber', 3, 1, 2, 20, null),
-(98, 'King K. Rool', 8, 8, 7, 20, null);
+(94, 'Kritter', 2, 1, 1, 21, null),
+(95, 'Krusha', 3, 3, 3, 21, null),
+(96, 'Klaptrap', 1, 1, 0, 21, null),
+(97, 'Klobber', 3, 1, 2, 21, null),
+(98, 'King K. Rool', 8, 8, 7, 21, null);
 
 -- Elementos de la tabla personajes Insecto
 INSERT INTO personajes (id_personaje, nombre, vida, ataque, coste, id_clase, id_objeto) VALUES
-(99, 'Abejorro', 1, 3, 1, 21, null),
-(100, 'Marchimotas', 3, 1, 2, 21, null);
+(99, 'Abejorro', 1, 3, 1, 22, null),
+(100, 'Marchimotas', 3, 1, 2, 22, null);
 
 -- Elementos de la tabla efectos
 INSERT INTO efectos (id_efecto, efecto, ataque_aumentado, ataque, vida_aumentada, vida_disminuida) VALUES
