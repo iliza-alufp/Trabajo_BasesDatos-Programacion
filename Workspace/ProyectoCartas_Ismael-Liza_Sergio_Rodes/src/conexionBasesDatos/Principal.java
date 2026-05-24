@@ -4,58 +4,61 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import ventanaAplicacion.Ventana;
-import ventanaAplicacion.VentanaSimulacionCartas;
 
 public class Principal {
 	
-	public static void mostrarPersonajes(Connection conexion) {
+    // CONSERVADO: Tu método original para comprobar los datos por consola al arrancar
+    public static void mostrarPersonajes(Connection conexion) {
+        String query = "SELECT * FROM personajes";
 		
-		String query = "SELECT * FROM personajes";
-		
-		try {
-			Statement comando = conexion.createStatement();
-
-			ResultSet resultado = comando.executeQuery(query);
+        try {
+            Statement comando = conexion.createStatement();
+            ResultSet resultado = comando.executeQuery(query);
 			
-			/* Se imprimen los registros que estén guardados en la base de datos */
-			while (resultado.next()) {
-				System.out.println("id: " + resultado.getInt(1)
-						+ "\nVida: " + resultado.getString(2)
-						+ "\nAtaque: " + resultado.getString(3)
-						+ "\nCoste: " + resultado.getString(4));
+            System.out.println("=== LOG DE CONTROL: CARTAS EN LA BASE DE DATOS ===");
+            while (resultado.next()) {
+                // Modificado ligeramente para que use los nombres reales de tus columnas
+                System.out.println("ID Carta: " + resultado.getInt("id_personaje")
+                        + "\nNombre: " + resultado.getString("nombre")
+                        + "\nVida: " + resultado.getInt("vida")
+                        + "\nAtaque: " + resultado.getInt("ataque")
+                        + "\nCoste: " + resultado.getInt("coste"));
 
-				System.out.println("------------------------------------------");
-			}
+                System.out.println("------------------------------------------");
+            }
 		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-	public static void main(String[] MySQLConnection) {
+    public static void main(String[] args) {
 		
-		
-		MySQLConnection db = new MySQLConnection();
-		Connection conexion = db.mySQLConnect();
+        // 1. CONSERVADO: Tu lógica de conexión inicial por consola para depuración
+        MySQLConnection db = new MySQLConnection();
+        Connection conexion = db.mySQLConnect();
 
-		mostrarPersonajes(conexion);
+        // Mostramos el estado actual en la consola de comandos
+        mostrarPersonajes(conexion);
 		
-		System.out.println("Fin - Cerramos conexión");
+        System.out.println("Control de consola finalizado -> Levantando Interfaz Gráfica.");
 		
-		try {
-			conexion.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		Ventana v = new Ventana();
-		
-		
-	}
+        try {
+            if (conexion != null) {
+                conexion.close(); // Cerramos esta conexión temporal de consola de forma segura
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        // 2. NUEVO/TEMARIO: Lanzamiento controlado del entorno visual Swing (Diapositiva 7)
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // Abre tu ventana oficial a mano con layouts y componentes
+                new Ventana();
+            }
+        });
+    }
 }
-
