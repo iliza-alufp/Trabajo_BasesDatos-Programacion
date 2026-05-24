@@ -409,7 +409,7 @@ CREATE PROCEDURE (IN p_nombre VARCHAR(30))
 
   BEGIN
     SELECT nombre, vida, ataque, coste
-    FROM personaje
+    FROM personajes
   WHERE p_nombre = nombre;
   END //
   
