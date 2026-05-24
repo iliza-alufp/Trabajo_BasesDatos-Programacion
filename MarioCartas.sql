@@ -405,7 +405,7 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE PROCEDURE (IN p_nombre VARCHAR(30))
+CREATE PROCEDURE buscar_carta (IN p_nombre VARCHAR(30))
 
   BEGIN
     SELECT nombre, vida, ataque, coste
