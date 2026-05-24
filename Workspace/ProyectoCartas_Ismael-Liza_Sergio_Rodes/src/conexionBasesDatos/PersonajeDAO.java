@@ -14,7 +14,7 @@ public class PersonajeDAO {
     // INSERTAR CARTA (Llamando a tu procedimiento crear_carta)
     public boolean insertar(Personaje p) {
         String sql = "{call crear_carta(?, ?, ?, ?, ?, ?)}";
-        try (Connection con = ConexionBD.getConexion();
+        try (Connection con = MySQLConnection.getConexion();
              CallableStatement cs = con.prepareCall(sql)) {
             
             cs.setString(1, p.getNombre());
@@ -37,7 +37,7 @@ public class PersonajeDAO {
     // ELIMINAR CARTA (Llamando a tu procedimiento eliminar_carta)
     public boolean eliminar(String nombre) {
         String sql = "{call eliminar_carta(?)}";
-        try (Connection con = ConexionBD.getConexion();
+        try (Connection con = MySQLConnection.getConexion();
              CallableStatement cs = con.prepareCall(sql)) {
             
             cs.setString(1, nombre);
@@ -52,7 +52,7 @@ public class PersonajeDAO {
     public List<Personaje> buscarPorNombre(String nombreBuscar) {
         List<Personaje> lista = new ArrayList<>();
         String sql = "{call buscar_carta_por_nombre(?)}";
-        try (Connection con = ConexionBD.getConexion();
+        try (Connection con = MySQLConnection.getConexion();
              CallableStatement cs = con.prepareCall(sql)) {
             
             cs.setString(1, nombreBuscar);
