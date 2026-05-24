@@ -2,6 +2,9 @@ package ventanaAplicacion;
 
 import java.net.URL;
 
+import modelo.Personaje;
+import conexionBasesDatos.PersonajeDAO;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -9,6 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 public class Ventana extends JFrame {
 
