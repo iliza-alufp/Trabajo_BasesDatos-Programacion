@@ -1,35 +1,37 @@
 package ventanaAplicacion;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
+import java.awt.*;
 
 public class VentanaSecundaria extends JDialog {
 
-	public VentanaSecundaria(Animal a) {
-		// hacemos esto para que cuando se abra esta ventana no deje hacer nada con el
-		// resto de ventanas hasta que no se cierre esta
-		this.setModal(true);
+    public VentanaSecundaria(JFrame ventanaPrincipal, String nombrePersonaje) {
+        // Ventana modal dependiente del marco padre principal (Diapositiva 31)
+        super(ventanaPrincipal, "Detalles de Soporte - Objeto", true);
+        
+        JPanel jp = new JPanel();
+        jp.setLayout(new BorderLayout(10, 10));
 
-		JPanel jp = new JPanel();
-		jp.setLayout(new BorderLayout());
+        String textoInformativo = "<html><body style='text-align: center;'>"
+                + "<h3>Módulo de Equipamiento</h3>"
+                + "El personaje seleccionado es: <b>" + nombrePersonaje + "</b><br><br>"
+                + "Actualmente se encuentra conectado a la tabla <i>objetos</i> "
+                + "manteniendo la integridad referencial del juego."
+                + "</body></html>";
 
-		JTextArea campoTexto = new JTextArea(a.toString());
-		// Editable false para que no se pueda modificar el contenido de campoTexto
-		campoTexto.setEditable(false);
+        JLabel label = new JLabel(textoInformativo, SwingConstants.CENTER);
+        jp.add(label, BorderLayout.CENTER);
 
-		jp.add(campoTexto, BorderLayout.CENTER);
+        JButton btnCerrar = new JButton("Volver");
+        btnCerrar.addActionListener(e -> dispose()); // Destruye el diálogo (Diapositiva 35)
+        
+        JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelBoton.add(btnCerrar);
+        jp.add(panelBoton, BorderLayout.SOUTH);
 
-		this.setContentPane(jp);
-		this.setSize(200, 100);
-		this.setTitle("Ventana Resultado");
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-		
-		
-		
-	}
-
+        this.setContentPane(jp);
+        this.setSize(420, 220);
+        this.setLocationRelativeTo(ventanaPrincipal);
+        this.setVisible(true);
+    }
 }
