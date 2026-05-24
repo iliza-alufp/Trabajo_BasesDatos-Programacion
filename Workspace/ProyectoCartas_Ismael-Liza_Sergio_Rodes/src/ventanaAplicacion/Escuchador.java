@@ -2,100 +2,75 @@ package ventanaAplicacion;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import modelo.Personaje;
+import conexionBasesDatos.PersonajeDAO;
 
 public class Escuchador implements ActionListener {
 
-	private Ventana v;
+    private Ventana v;
+    private PersonajeDAO personajeDAO;
 
-	/**
-	 * Constructor por defecto
-	 */
-	public Escuchador() {
-		super();
-	}
+    public Escuchador() {
+        super();
+        this.personajeDAO = new PersonajeDAO();
+    }
 
-	/**
-	 * Constructor que le pasa por parámetro un objeto Ventana
-	 * 
-	 * @param v
-	 */
-	public Escuchador(Ventana v) {
-		super();
-		this.v = v;
-	}
+    public Escuchador(Ventana v) {
+        super();
+        this.v = v;
+        this.personajeDAO = new PersonajeDAO();
+    }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JButton boton = (JButton) e.getSource();
 
-		JButton boton = (JButton) e.getSource();
+        if (boton.getName().equalsIgnoreCase("btn_guardar")) {
+            guardar();
+        }
+    }
 
-		if (boton.getName().equalsIgnoreCase("btn_guardar")) {
+    public void vaciar() {
+        v.getCampoNombre().setText("");
+        v.getCampoVida().setText("");
+        v.getCampoAtaque().setText("");
+        v.getCampoCoste().setText("");
+    }
 
-			guardar();
+    public void guardar() {
+        String nombre = v.getCampoNombre().getText().trim();
+        String vidaStr = v.getCampoVida().getText().trim();
+        String ataqueStr = v.getCampoAtaque().getText().trim();
+        String costeStr = v.getCampoCoste().getText().trim();
 
-		} else if (boton.getName().equalsIgnoreCase("btn_solicitar")) {
-			String nombreBusquedad = JOptionPane.showInputDialog("Introduzca el nombre de animal que desea buscar: ");
-			boolean encontrado = false;
+        // Validación de campos vacíos (Requisito de la práctica)
+        if (nombre.isEmpty() || vidaStr.isEmpty() || ataqueStr.isEmpty() || costeStr.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe rellenar todos los campos del personaje", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-			for (Animal a : Animal.getListaAnimales()) {
-				if (a.getNombre().equalsIgnoreCase(nombreBusquedad)) {
-					new VentanaSecundaria(a);
-					encontrado = true;
-				}
-			}
+        try {
+            // Convertimos los textos en números enteros
+            int vida = Integer.parseInt(vidaStr);
+            int ataque = Integer.parseInt(ataqueStr);
+            int coste = Integer.parseInt(costeStr);
+            int idClase = 1; // Le asignamos la clase 'Humano' por defecto para empezar
 
-			if (!encontrado) {
-				JOptionPane.showMessageDialog(null, "NO se ha encontrado el animal con nombre " + nombreBusquedad,
-						"Resultado Busqueda", JOptionPane.ERROR_MESSAGE);
-			}
-		} else if(boton.getName().equalsIgnoreCase("btn_simular")) {
-			
-			new VentanaSimulacionCartas();
-			
-		}
+            // Creamos el objeto con tus datos de MarioCartas
+            Personaje p = new Personaje(0, nombre, vida, ataque, coste, idClase, null);
 
-	}
+            // Lo mandamos a la base de datos a través de tu DAO
+            if (personajeDAO.insertar(p)) {
+                JOptionPane.showMessageDialog(null, "¡Carta de personaje añadida correctamente!");
+                vaciar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al insertar en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
-	public void vaciar() {
-		v.getCampoNombre().setText("");
-		v.getCampoRaza().setText("");
-		v.getCampoEdad().setText("");
-	}
-
-	public void guardar() {
-		String nombre = v.getCampoNombre().getText();
-		String raza = v.getCampoRaza().getText();
-
-		if (nombre.trim().isEmpty() || raza.trim().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Debe rellenar el campo nombre y raza", "Error",
-					JOptionPane.ERROR_MESSAGE);
-		} else {
-			String edad = v.getCampoEdad().getText();
-			int numEdad;
-
-			try {
-
-				numEdad = Integer.parseInt(edad);
-
-				Animal a = new Animal(nombre, raza, numEdad);
-
-				Animal.getListaAnimales().add(a);
-
-				vaciar();
-
-				JOptionPane.showMessageDialog(null, "Animal Añadido correctamente");
-
-				System.out.println(Animal.getListaAnimales());
-
-			} catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(null, "Edad incorrecta", "Error edad", JOptionPane.ERROR_MESSAGE);
-			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Edad incorrecta", "Error general", JOptionPane.ERROR_MESSAGE);
-			}
-		}
-	}
-
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Vida, Ataque y Coste deben ser números enteros", "Error de formato", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }
